@@ -1,0 +1,106 @@
+/* The room widget (js/roomWidget.js). Self-contained: embed.html loads no Bootstrap. */
+
+.hic-room-widget {
+  position: relative;
+  font-family: system-ui, sans-serif;
+}
+
+.hic-room-widget button,
+.hic-room-widget input {
+  font: inherit;
+}
+
+.hic-room-widget [hidden] {
+  display: none !important;
+}
+
+.hic-room-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+}
+
+.hic-room-indicator:hover {
+  color: #fff;
+}
+
+.hic-room-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #6c757d;
+}
+
+.hic-room-widget[data-status="connecting"] .hic-room-dot,
+.hic-room-widget[data-status="closed"] .hic-room-dot {
+  background: #ffc107;
+}
+
+.hic-room-widget[data-status="open"] .hic-room-dot {
+  background: #28a745;
+}
+
+.hic-room-widget[data-status="expired"] .hic-room-dot {
+  background: #dc3545;
+}
+
+.hic-room-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 320px;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  background: #fff;
+  color: #5f5f5f;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hic-room-link {
+  display: flex;
+  gap: 6px;
+}
+
+.hic-room-link input {
+  flex: 1;
+  min-width: 0;
+}
+
+.hic-room-toast {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2000;
+  padding: 8px 14px;
+  border-radius: 4px;
+  background: #343a40;
+  color: #fff;
+}
+
+/* embed.html: no navbar to sit in, so the widget floats over the page's corner. */
+.hic-room-widget--floating {
+  position: fixed;
+  left: 8px;
+  bottom: 8px;
+  z-index: 2000;
+}
+
+.hic-room-widget--floating .hic-room-indicator {
+  background: #343a40;
+}
+
+.hic-room-widget--floating .hic-room-panel {
+  top: auto;
+  bottom: 100%;
+}

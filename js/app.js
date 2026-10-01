@@ -26,6 +26,7 @@ import {registerDevUrlMapper} from './devUrlMapper.js'
 import {AlertSingleton} from './alertSingleton.js'
 import {initializationHelper, syncControlMapDropdown} from "./initializationHelper.js"
 import {juiceboxConfig} from './juiceboxConfig.js'
+import {createRoomWidget} from './roomWidget.js'
 import 'juicebox.js/dist/css/juicebox.css'
 import 'infinite-table/css/infinite-table.css'
 import '../css/widgets.css'
@@ -48,5 +49,18 @@ async function init(container) {
 
     // Only now do the browsers exist to subscribe to.
     syncControlMapDropdown()
+
+    // After hic.init, so a snapshot link is restored before a join link joins — see js/roomWidget.js.
+    createRoomWidget({
+        hic,
+        container,
+        url: import.meta.env.VITE_WS_URL,
+        mount: widget => {
+            const item = document.createElement('li')
+            item.className = 'nav-item ms-2 mt-1'
+            item.appendChild(widget)
+            document.querySelector('#hic-share-button').closest('.nav-item').after(item)
+        }
+    })
 
 }
