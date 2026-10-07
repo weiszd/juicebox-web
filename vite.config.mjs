@@ -72,6 +72,18 @@ export default defineConfig(async ({ command, mode }) => {
         // trailing slash, ./assets/ would resolve to the site root. The worker redirects
         // /juicebox to /juicebox/ for exactly this reason — see workers/juicebox-path-proxy.
         base: './',
+        // Local testing against a relay on this machine (juicebox-mcp's `npm run dev:server`):
+        // forward /ws to it, so a page started with VITE_WS_URL=ws://localhost:5173/ws talks
+        // to one address only. Claude Desktop's built-in panel loads the page but its direct
+        // connection to port 8787 never reaches the relay. Dev server only; builds ignore it.
+        // changeOrigin is required: with the page's Host header left in place, wrangler dev
+        // sees Origin and Host agree and rewrites Origin to the Worker's deployed domain,
+        // which the relay's allow-list then refuses.
+        server: {
+            proxy: {
+                '/ws': { target: 'ws://localhost:8787', ws: true, changeOrigin: true },
+            },
+        },
         test: {
             // igv-utils declares only `module`, which Vite's browser build honours and Vitest's resolver does not.
             alias: { 'igv-utils': fileURLToPath(new URL('./node_modules/igv-utils/src/index.js', import.meta.url)) },
