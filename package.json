@@ -20,7 +20,7 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@aidenlab/juicebox-remote": "2.0.1-next.2",
+    "@aidenlab/juicebox-remote": "2.0.1-next.3",
     "happy-dom": "^20.14.5",
     "igv-utils": "github:igvteam/igv-utils#v1.7.1",
     "infinite-table": "github:igvteam/infinite-table#main",
