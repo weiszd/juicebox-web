@@ -1,10 +1,11 @@
-# Integration test: juicebox.js `weiszd-fork-merge` in Claude Desktop
+# Integration test: juicebox.js 4.11.0 in Claude Desktop
 
-**Question:** does aidenlab juicebox.js master (tag `weiszd-fork-merge`, `d0cdcf3`)
-work in place of `4.10.0-mcp.2` when Claude Desktop drives juicebox-web?
+**Question:** does juicebox.js 4.11.0 (the npm release from aidenlab master, which
+includes the weiszd fork work) work in place of `4.10.0-mcp.2` when Claude Desktop
+drives juicebox-web?
 
-**Already done:** this branch (`juicebox-weiszd-fork-merge`) points `juicebox.js` at
-`github:aidenlab/juicebox.js#weiszd-fork-merge`. Build and the 74 unit tests pass.
+**Already done:** this branch (`juicebox-weiszd-fork-merge`) pins `juicebox.js` at
+`^4.11.0` (lockfile: 4.11.0). Build and the 74 unit tests pass.
 
 ## How the pieces connect
 
@@ -80,8 +81,8 @@ Ask for each, and check the panel draws it:
 **Pass:** every request draws correctly in the panel, with no tool errors.
 
 **Fail:** a tool error, nothing drawn, or the wrong thing drawn. Note the request.
-If you are unsure whether the merge caused it, retry on juicebox-web `master`
-(still `4.10.0-mcp.2`). If it fails there too, it is not the merge.
+If you are unsure whether 4.11.0 caused it, retry on juicebox-web `master`
+(still `4.10.0-mcp.2`). If it fails there too, it is not 4.11.0.
 
 ## Shut down
 
@@ -89,4 +90,4 @@ Ctrl-C the tunnel first, then the page and the relay.
 
 ## After it passes
 
-Publish juicebox.js 4.11.0, then move juicebox-web's pin from the git tag to `4.11.0`.
+Merge this branch into juicebox-web `master`.
